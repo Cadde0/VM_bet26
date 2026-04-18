@@ -12,16 +12,16 @@
 
 ## Phase 2: Foundational
 
-- [ ] T005 Create User, Match, Guess, Comment/Emote models in webapp/src/models/
-- [ ] T006 Set up database migrations for all entities
-- [ ] T007 Implement authentication (register, login, JWT/session) in webapp/src/pages/api/auth/
-- [ ] T008 Implement API route for fetching and caching matches from Football-Data.org (with rate limit handling)
+- [x] T005 Create User, Match, Guess, Comment/Emote models in webapp/src/models/
+- [x] T006 Set up database migrations for all entities
+- [x] T007 Implement authentication (register, login, JWT/session) in webapp/src/pages/api/auth/
+- [x] T008 Implement API route for fetching and caching matches from Football-Data.org (with rate limit handling)
 
 ## Phase 3: User Story 1 - Registration, Login & Profile Picture (P1)
 
-- [ ] T009 [P] [US1] Create registration and login UI in webapp/src/pages/
-- [ ] T010 [US1] Connect UI to backend auth endpoints
-- [ ] T011 [US1] Add user profile page and session management
+- [x] T009 [P] [US1] Create registration and login UI in webapp/src/pages/
+- [x] T010 [US1] Connect UI to backend auth endpoints
+- [x] T011 [US1] Add user profile page and session management
 - [ ] T011a [US1] Implement profile picture upload UI and backend endpoint
 - [ ] T011b [US1] Store uploaded images in cloud storage and save URL in DB
 - [ ] T011c [US1] Display profile pictures on user profile and leaderboard
