@@ -22,15 +22,49 @@ export default async function handler(
         1000 <
         CACHE_TTL
     ) {
-      return res
-        .status(200)
-        .json({ matches: cacheResult.rows[0].data.matches });
+      // Normalize matches for frontend
+      const matches = (cacheResult.rows[0].data.matches || []).map(
+        (m: any) => ({
+          id: m.id,
+          home_team: m.homeTeam?.name || "",
+          away_team: m.awayTeam?.name || "",
+          home_team_flag: m.homeTeam?.crest || m.homeTeam?.flag || "",
+          away_team_flag: m.awayTeam?.crest || m.awayTeam?.flag || "",
+          start_time: m.utcDate,
+          result:
+            m.score?.fullTime?.home !== null && m.score?.fullTime?.away !== null
+              ? `${m.score.fullTime.home}-${m.score.fullTime.away}`
+              : null,
+          status:
+            m.status === "IN_PLAY"
+              ? "in_progress"
+              : m.status?.toLowerCase() || "scheduled",
+        }),
+      );
+      return res.status(200).json({ matches });
     }
 
     // Fetch fresh data and cache it
     const data = await fetchFromFootballData("/competitions/WC/matches");
     await pool.query("INSERT INTO match_cache (data) VALUES ($1)", [data]);
-    res.status(200).json({ matches: data.matches });
+    // Normalize matches for frontend
+    const matches = (data.matches || []).map((m: any) => ({
+      id: m.id,
+      home_team: m.homeTeam?.name || "",
+      away_team: m.awayTeam?.name || "",
+      home_team_flag: m.homeTeam?.crest || m.homeTeam?.flag || "",
+      away_team_flag: m.awayTeam?.crest || m.awayTeam?.flag || "",
+      start_time: m.utcDate,
+      result:
+        m.score?.fullTime?.home !== null && m.score?.fullTime?.away !== null
+          ? `${m.score.fullTime.home}-${m.score.fullTime.away}`
+          : null,
+      status:
+        m.status === "IN_PLAY"
+          ? "in_progress"
+          : m.status?.toLowerCase() || "scheduled",
+    }));
+    res.status(200).json({ matches });
   } catch (error) {
     res.status(500).json({ error: (error as Error).message });
   }

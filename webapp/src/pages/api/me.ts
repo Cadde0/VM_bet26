@@ -16,7 +16,14 @@ export default async function handler(
     );
     if (result.rowCount === 0)
       return res.status(404).json({ error: "User not found" });
-    res.status(200).json({ user: result.rows[0] });
+    const dbUser = result.rows[0];
+    const user = {
+      id: dbUser.id,
+      name: dbUser.name,
+      points: dbUser.points,
+      profilePictureUrl: dbUser.profile_picture_url || null,
+    };
+    res.status(200).json({ user });
   } catch (error) {
     res.status(500).json({ error: (error as Error).message });
   }

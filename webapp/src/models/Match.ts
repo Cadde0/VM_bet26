@@ -1,6 +1,6 @@
 // Match model interface
 type Match = {
-  id: string;
+  id: number;
   teams: [string, string];
   startTime: string;
   result?: string;

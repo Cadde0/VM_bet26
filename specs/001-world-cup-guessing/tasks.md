@@ -22,9 +22,9 @@
 - [x] T009 [P] [US1] Create registration and login UI in webapp/src/pages/
 - [x] T010 [US1] Connect UI to backend auth endpoints
 - [x] T011 [US1] Add user profile page and session management
-- [ ] T011a [US1] Implement profile picture upload UI and backend endpoint
-- [ ] T011b [US1] Store uploaded images in cloud storage and save URL in DB
-- [ ] T011c [US1] Display profile pictures on user profile and leaderboard
+- [x] T011a [US1] Implement profile picture upload UI and backend endpoint
+- [x] T011b [US1] Store uploaded images in public/uploads and save URL in DB
+- [x] T011c [US1] Display profile pictures on user profile and leaderboard
 
 ## Phase 4: User Story 2 - Place Guesses (P2)
 

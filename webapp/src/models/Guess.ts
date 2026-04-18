@@ -2,7 +2,7 @@
 type Guess = {
   id: string;
   userId: string;
-  matchId: string;
+  matchId: number;
   predictedResult: string;
   timestamp: string;
 };
