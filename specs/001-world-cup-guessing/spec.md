@@ -1,131 +1,133 @@
 # Feature Specification: World Cup 2026 Guessing Website
 
-**Feature Branch**: `[001-world-cup-guessing]`
-**Created**: 2026-04-17
-**Status**: Draft
-**Input**: User description: "Implement the feature specification based on the updated constitution. I want to build a website that me and my friends can use to guess the results of the world cup 2026. The website should be easy to use and have nice sleek look. Everyone should be able to create a user, the users can then place their guesses on the result each of the games. There should then be some sort of point system for correct guesses and there should be some page where you can view leaderboards, recent games and see everyone elses results, guesses and points, maybe there should also be some sort of way to interact with the other users, or comment/emote on their guesses or recent games."
+**Purpose**: Enable a private group of friends to predict World Cup 2026 match results, track points, and interact socially in a transparent, fair, and user-friendly way.
 
-## User Scenarios & Testing _(mandatory)_
+**Stakeholders**: Group members (users), feature owner (developer)
 
+**Business Need**: Increase engagement and fun during the World Cup by providing a transparent, auditable, and easy-to-use guessing platform with social features. No financial transactions involved.
 
-### User Story 1 - User Registration, Login & Profile Picture (Priority: P1)
+**Scope**: Only World Cup 2026 matches, private group (no public registration), no real money or prizes.
 
-A new user can create an account, log in, and upload a profile picture.
+**Out of Scope**: Financial betting, public leaderboards, non-World Cup matches, mobile apps (web only for MVP).
 
-**Why this priority**: Essential for all other features; no participation without user accounts.
+**User Value**: Users can register, make and edit guesses, see results and leaderboards, and interact with friends through comments/emotes. All actions are auditable and transparent.
 
+## User Scenarios & Acceptance Criteria
 
-**Independent Test**: Register a new user, log in, upload a profile picture, and verify it is displayed on their profile and leaderboard.
+### User Story 1 - User Registration, Login & Profile Picture (P1)
 
+**As a** new user, **I want** to register, log in, and upload a profile picture **so that** I can participate and be recognized on the leaderboard.
 
-**Acceptance Scenarios**:
-1. **Given** a new visitor, **When** they register, **Then** their account is created and they are logged in.
-2. **Given** a registered user, **When** they log in, **Then** they access their dashboard.
-3. **Given** a logged-in user, **When** they upload a profile picture, **Then** it is saved and displayed on their profile and leaderboard.
+**Acceptance Criteria:**
 
----
-
-### User Story 2 - Place Guesses on Matches (Priority: P2)
-
-A logged-in user can view upcoming World Cup games and submit their guess for each game's result.
-
-**Why this priority**: Core engagement feature; enables the main activity of the site.
-
-**Independent Test**: User submits a guess for a match and it is saved and visible in their history.
-
-**Acceptance Scenarios**:
-
-1. **Given** a logged-in user, **When** they view a match, **Then** they can submit a guess for the result.
-2. **Given** a user has submitted a guess, **When** they revisit the match, **Then** their guess is displayed.
+1. Registration creates a new user and logs them in.
+2. Login grants access to the dashboard.
+3. Profile picture upload is available after login and is displayed on the profile and leaderboard.
+4. Registration/login errors are clearly shown to the user.
+5. Profile picture upload is limited to 2MB and common image formats.
 
 ---
 
-### User Story 3 - Points & Leaderboard (Priority: P3)
+### User Story 2 - Place and Edit Guesses (P2)
 
-Users earn points for correct guesses. There is a leaderboard showing all users ranked by points.
+**As a** logged-in user, **I want** to view upcoming matches and submit or edit my guess for each game's result **so that** I can participate in the competition.
 
-**Why this priority**: Adds competition and motivation; keeps users engaged.
+**Acceptance Criteria:**
 
-**Independent Test**: After results are entered, points are awarded and leaderboard updates.
-
-**Acceptance Scenarios**:
-
-1. **Given** a set of completed matches, **When** results are entered, **Then** users with correct guesses receive points.
-2. **Given** users with points, **When** the leaderboard is viewed, **Then** users are ranked by points.
-
----
-
-### User Story 4 - View Recent Games & Results (Priority: P4)
-
-Users can view recent games, their results, and all users' guesses and points for each game.
-
-**Why this priority**: Transparency and engagement; lets users see how everyone is doing.
-
-**Independent Test**: User views a recent game and sees all guesses and results.
-
-**Acceptance Scenarios**:
-
-1. **Given** a completed match, **When** a user views it, **Then** all users' guesses and points are shown.
-2. **Given** a recent game, **When** a user visits the page, **Then** the result and guesses are visible.
+1. Users can view a list of all upcoming matches.
+2. Users can submit a guess for each match before the match starts.
+3. Users can edit their guess for any match until the match starts.
+4. Submitted/edited guesses are saved and visible in the user's history.
+5. Guess submission/edit errors are clearly shown to the user.
 
 ---
 
-### User Story 5 - Social Interaction (Priority: P5)
+### User Story 3 - Points & Leaderboard (P3)
 
-Users can comment or emote on guesses or recent games.
+**As a** user, **I want** to earn points for correct guesses and see a leaderboard **so that** I can track my performance and compete with friends.
 
-**Why this priority**: Increases fun and engagement; adds a social layer.
+**Acceptance Criteria:**
 
-**Independent Test**: User leaves a comment or emote and it is visible to others.
+1. Points are awarded: 3 for exact score, 1 for correct winner, 0 otherwise.
+2. Leaderboard ranks all users by total points.
+3. Leaderboard updates within 5 minutes of new results.
+4. Users can view their own points and ranking at any time.
 
-**Acceptance Scenarios**:
+---
 
-1. **Given** a user viewing a guess or game, **When** they leave a comment or emote, **Then** it appears for all users.
-2. **Given** a comment or emote, **When** another user views the page, **Then** they see the interaction.
+### User Story 4 - View Recent Games & Results (P4)
+
+**As a** user, **I want** to view recent games, results, and all users' guesses and points **so that** I can see how everyone is doing.
+
+**Acceptance Criteria:**
+
+1. Users can view a list of recent/completed matches and their results.
+2. For each match, all users' guesses and points are visible.
+3. Users can view their own guess history and results.
+
+---
+
+### User Story 5 - Social Interaction (P5)
+
+**As a** user, **I want** to comment or emote on guesses or recent games **so that** I can interact with friends.
+
+**Acceptance Criteria:**
+
+1. Users can leave comments or emotes (emoji) on guesses or games.
+2. Comments/emotes are visible to all users within 1 minute of posting.
+3. Abusive content can be reported and is hidden after review.
 
 ---
 
 ## Functional Requirements
 
-1. Users must be able to register, log in, manage their account securely, and upload a profile picture.
-2. Users can view a list of upcoming and completed World Cup 2026 matches.
-3. Users can submit, view, and edit their guesses for each match until the start of the tournament.
-4. The system must record all guesses and calculate points based on actual results.
-5. A leaderboard must display all users ranked by points.
+1. Users can register, log in, and upload a profile picture (max 2MB, common formats).
+2. Users can view a list of all upcoming and completed World Cup 2026 matches.
+3. Users can submit and edit their guesses for each match until the match starts.
+4. The system records all guesses and calculates points based on actual results (3/1/0 rule).
+5. A leaderboard displays all users ranked by points, updating within 5 minutes of new results.
 6. Users can view recent games, results, and all users' guesses and points.
-7. Users can comment or emote on guesses or games.
-8. The website must be visually appealing, modern, and easy to use on desktop and mobile.
-9. No financial transactions are handled by the website.
+7. Users can comment or emote (emoji) on guesses or games; abusive content can be reported.
+8. The website is easy to use, visually appealing, and responsive on desktop and mobile. "Visually appealing" is defined as scoring ≥4/5 on a user survey for design and usability by at least 80% of users.
+9. All actions (guesses, edits, results, comments) are logged and auditable by users.
+10. No financial transactions or real money are handled by the website.
 
 ## Success Criteria
 
-- 100% of users can register, log in, and upload a profile picture without errors.
-- 95% of guesses are submitted and saved successfully before match start.
+- 100% of users can register, log in, and upload a profile picture (≤2MB, common formats) without errors.
+- 95% of guesses are submitted, saved, and editable before match start.
 - Points are awarded accurately for correct guesses within 1 hour of result entry.
 - Leaderboard updates within 5 minutes of new results.
 - Users can view all recent games, results, and guesses without page errors.
 - Comments/emotes are visible to all users within 1 minute of posting.
-- The website receives positive feedback on usability and design from at least 80% of users.
+- The website scores ≥4/5 on a user survey for design/usability by at least 80% of users.
+- All user actions (guesses, edits, comments, results) are logged and auditable by users.
 - No user data breaches or privacy complaints during the tournament.
-- No financial transactions are processed by the system.
+- No financial transactions or real money are processed by the system.
 
 ## Key Entities
 
-- User (id, name, email, password, points, registration date)
-- Match (id, teams, start time, result, status)
-- Guess (id, user_id, match_id, predicted_result, timestamp)
-- Comment/Emote (id, user_id, match_id, content, type, timestamp)
+- User: id, name, email, password (hashed), points, registration date, profile picture URL
+- Match: id, teams, start time, result, status
+- Guess: id, user_id, match_id, predicted_result, timestamp
+- Comment/Emote: id, user_id, match_id, content, type (text/emoji), timestamp
 
-## Assumptions
+## Assumptions & Dependencies
 
 - All users are friends and trusted; no public registration.
 - Only World Cup 2026 matches are included.
 - Points system: 3 points for exact score, 1 point for correct winner, 0 otherwise.
-- Social features (comments/emotes) are for fun and not moderated unless abuse occurs. Both text comments and emojis are allowed.
+- Social features (comments/emotes) are for fun; abusive content can be reported and hidden after review.
 - No financial transactions or real money involved.
+- Relies on Football-Data.org API for match data (free tier must cover all matches and usage limits).
+
+## Edge Cases
+
+- User tries to submit or edit a guess after match start: system blocks and shows error.
+- User uploads a profile picture >2MB or unsupported format: system blocks and shows error.
+- User submits abusive comment/emote: can be reported and hidden after review.
+- API for match data is unavailable: show error and retry/backoff.
 
 ## [NEEDS CLARIFICATION]
 
-1. [RESOLVED: Points system: 3 points for exact score, 1 for correct winner, 0 otherwise.]
-2. [RESOLVED: Both text comments and emojis are allowed.]
-3. [RESOLVED: Users can edit guesses until the start of the tournament.]
+None. All requirements are now testable and unambiguous.

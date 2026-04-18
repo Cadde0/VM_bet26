@@ -1,0 +1,10 @@
+# Vercel Project Configuration
+
+# This file is optional for most Next.js projects, but can be used to define build and output settings.
+# For custom builds, add settings here. For most cases, Vercel auto-detects Next.js and works out of the box.
+
+# Example (uncomment and edit as needed):
+# {
+#   "buildCommand": "npm run build",
+#   "outputDirectory": ".next"
+# }
