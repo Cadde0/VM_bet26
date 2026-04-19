@@ -47,6 +47,37 @@ export default async function handler(
     // Fetch fresh data and cache it
     const data = await fetchFromFootballData("/competitions/WC/matches");
     await pool.query("INSERT INTO match_cache (data) VALUES ($1)", [data]);
+
+    // Upsert matches into the matches table
+    for (const m of data.matches || []) {
+      await pool.query(
+        `INSERT INTO matches (id, team1, team2, start_time, result, status, home_team_flag, away_team_flag)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+         ON CONFLICT (id) DO UPDATE SET
+           team1 = EXCLUDED.team1,
+           team2 = EXCLUDED.team2,
+           start_time = EXCLUDED.start_time,
+           result = EXCLUDED.result,
+           status = EXCLUDED.status,
+           home_team_flag = EXCLUDED.home_team_flag,
+           away_team_flag = EXCLUDED.away_team_flag;`,
+        [
+          m.id,
+          m.homeTeam?.name || "",
+          m.awayTeam?.name || "",
+          m.utcDate,
+          m.score?.fullTime?.home !== null && m.score?.fullTime?.away !== null
+            ? `${m.score.fullTime.home}-${m.score.fullTime.away}`
+            : null,
+          m.status === "IN_PLAY"
+            ? "in_progress"
+            : m.status?.toLowerCase() || "scheduled",
+          m.homeTeam?.crest || m.homeTeam?.flag || "",
+          m.awayTeam?.crest || m.awayTeam?.flag || "",
+        ],
+      );
+    }
+
     // Normalize matches for frontend
     const matches = (data.matches || []).map((m: any) => ({
       id: m.id,
